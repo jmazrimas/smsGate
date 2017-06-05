@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jmazrimas/smsGate/issues"
   },
-  "homepage": "https://github.com/jmazrimas/smsGate#readme"
+  "homepage": "https://github.com/jmazrimas/smsGate#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
 }
