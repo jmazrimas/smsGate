@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jmazrimas/smsGate#readme",
   "dependencies": {
     "express": "^4.15.3",
-    "pg": "^6.2.3"
+    "pg": "^6.2.3",
+    "sequelize": "^4.0.0"
   }
 }
