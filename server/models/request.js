@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var request = sequelize.define('request', {
     actioned: DataTypes.BOOLEAN,
     userId: DataTypes.INTEGER,
-    message: Datatypes.STRING
+    message: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
