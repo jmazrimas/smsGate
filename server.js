@@ -19,6 +19,14 @@ app.get('/requests', function(req, res) {
   });
 });
 
+app.post('/requests', function(req, res) {
+	models.request.create({ actioned: false, userId: 1 })
+  .then(function(request) {
+  	res.setHeader('Content-Type', 'application/json');
+		res.send(JSON.stringify(request));
+  });
+});
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
