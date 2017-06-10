@@ -31,15 +31,11 @@ app.post('/requests', function(req, res) {
 	  }
 	}).then(function(reqUser){
 		if (!reqUser) {
-			console.log('user not found');
 		} else {
-			console.log('user found!');
-			console.log(reqUser)
 			models.request.create({ actioned: false, userId: reqUser.id })
 			.then(function(newRequest) {
 				console.log(newRequest)
 			})
-
 		}
 	});
 	// models.request.create({ actioned: false, userId: 1 })
