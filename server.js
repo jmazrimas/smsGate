@@ -34,7 +34,7 @@ app.post('/requests', function(req, res) {
 		if (!reqUser) {
 			console.log('no user found')
 		} else {
-			models.request.create({ actioned: false, userId: reqUser.id })
+			models.request.create({ message: smsBody, actioned: false, userId: reqUser.id })
 			.then(function(newRequest) {
 				console.log('request created')
 				console.log(newRequest)
