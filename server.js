@@ -15,6 +15,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/requests', function(req, res) {
+	console.log('GET requests')
 	models.request.findAll({}).then(function(requests) {
 		res.setHeader('Content-Type', 'application/json');
 		res.send(JSON.stringify(requests));
@@ -22,7 +23,7 @@ app.get('/requests', function(req, res) {
 });
 
 app.post('/requests', function(req, res) {
-	console.log('received request create')
+	console.log('POST received request create')
 	var smsFrom = req.body.From.replace('+','');
 	var smsBody = req.body.Body;
 	models.user.findOne({
