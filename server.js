@@ -22,18 +22,20 @@ app.get('/requests', function(req, res) {
 });
 
 app.post('/requests', function(req, res) {
+	console.log('received request create')
 	var smsFrom = req.body.From.replace('+','');
 	var smsBody = req.body.Body;
-
 	models.user.findOne({
 	  where: {
 	    phone: smsFrom
 	  }
 	}).then(function(reqUser){
 		if (!reqUser) {
+			console.log('no user found')
 		} else {
 			models.request.create({ actioned: false, userId: reqUser.id })
 			.then(function(newRequest) {
+				console.log('request created')
 				console.log(newRequest)
 			})
 		}
