@@ -31,7 +31,7 @@ app.post('/requests', function(req, res) {
 	var smsFrom = req.body.From.replace('+','');
 	var smsBody = req.body.Body;
 
-	storedRequests.push(smsBody)
+	storedRequests.push({from: smsFrom, body: smsBody})
 
 	models.user.findOne({
 	  where: {
