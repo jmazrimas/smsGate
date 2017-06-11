@@ -4,6 +4,7 @@ var exphbs  = require('express-handlebars');
 var app = express();
 var models = require('./server/models/index');
 var bodyParser = require('body-parser');
+var storedRequests = []
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -16,16 +17,21 @@ app.get('/', function (req, res) {
 
 app.get('/requests', function(req, res) {
 	console.log('GET requests')
-	models.request.findAll({}).then(function(requests) {
-		res.setHeader('Content-Type', 'application/json');
-		res.send(JSON.stringify(requests));
-  });
+	// models.request.findAll({}).then(function(requests) {
+	// 	res.setHeader('Content-Type', 'application/json');
+	// 	res.send(JSON.stringify(requests));
+ //  });
+ 	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify(storedRequests));
+	storedRequests = [];
 });
 
 app.post('/requests', function(req, res) {
 	console.log('POST received request create')
 	var smsFrom = req.body.From.replace('+','');
 	var smsBody = req.body.Body;
+
+	storedRequests.push(smsBody)
 
 	models.user.findOne({
 	  where: {
