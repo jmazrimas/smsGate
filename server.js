@@ -26,27 +26,23 @@ app.post('/requests', function(req, res) {
 	console.log('POST received request create')
 	var smsFrom = req.body.From.replace('+','');
 	var smsBody = req.body.Body;
+
 	models.user.findOne({
 	  where: {
 	    phone: smsFrom
 	  }
 	}).then(function(reqUser){
 		if (!reqUser) {
-			console.log('no user found')
+			res.writeHead(200, {'Content-Type': 'text/xml'});
+				res.end('<Response><Message>Not authorized</Message></Response>');
 		} else {
 			models.request.create({ message: smsBody, actioned: false, userId: reqUser.id })
 			.then(function(newRequest) {
-				console.log('request created')
-				console.log(newRequest)
+				res.writeHead(200, {'Content-Type': 'text/xml'});
+				res.end('<Response><Message>Request received by smsGate</Message></Response>');
 			})
 		}
 	});
-	// models.request.create({ actioned: false, userId: 1 })
- //  .then(function(request) {
- //  	res.setHeader('Content-Type', 'application/json');
-	// 	res.send(JSON.stringify(request));
- //  });
- 	res.send('OK')
 });
 
 app.listen(app.get('port'), function() {
