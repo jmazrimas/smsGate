@@ -4,7 +4,7 @@ var exphbs  = require('express-handlebars');
 var app = express();
 var models = require('./server/models/index');
 var bodyParser = require('body-parser');
-var storedRequests = []
+var storedRequests = [];
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
