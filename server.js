@@ -17,13 +17,19 @@ app.get('/', function (req, res) {
 
 app.get('/requests', function(req, res) {
 	console.log('GET requests')
-	// models.request.findAll({}).then(function(requests) {
-	// 	res.setHeader('Content-Type', 'application/json');
-	// 	res.send(JSON.stringify(requests));
- //  });
  	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(storedRequests));
 	storedRequests = [];
+});
+
+
+app.get('/requests/last', function(req, res) {
+	console.log('GET last request')
+ 	returnLastRequest()
+ 		.then(function(request){
+ 			res.setHeader('Content-Type', 'application/json');
+			res.send(JSON.stringify(request))
+ 		})
 });
 
 app.post('/requests', function(req, res) {
@@ -55,3 +61,9 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
+var returnLastRequest = function() {
+	return models.request.findOne({
+	  limit: 1,
+	  order: [ [ 'id', 'DESC' ]]
+	})
+}
